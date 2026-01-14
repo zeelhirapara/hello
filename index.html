@@ -27,7 +27,7 @@
         .status { font-size: 13px; color: #555; margin-bottom: 15px; background: #eee; padding: 8px; border-radius: 5px;}
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding: 15px;
             background-color: #fff9c4;
             border-radius: 10px;
@@ -36,13 +36,13 @@
 
         label { font-weight: bold; color: #333; display: block; margin-bottom: 5px; }
 
-        input[type="text"], input[type="number"] {
+        input[type="text"] {
             padding: 12px;
             width: 95%;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         /* Buttons */
@@ -105,16 +105,11 @@
 
     <div class="container">
         <h2>🌸 Hirpara Parivar Invitation 🌸</h2>
-        <div class="status">📄 File: <b>Hirpara Parivar kankotri servo.pdf</b></div>
+        <div class="status">📄 File: <b>Hirpara Parivar kankotri sajode.pdf</b></div>
 
         <div class="input-group">
-            <label>1. Guest Name / મહેમાનનું નામ:</label>
+            <label>✍️ Enter Guest Name / મહેમાનનું નામ:</label>
             <input type="text" id="guestName" placeholder="e.g. કિરીટભાઈ પટેલ" oninput="updatePreview()">
-        </div>
-
-        <div class="input-group">
-            <label>2. Mobile Number / મોબાઈલ નંબર:</label>
-            <input type="number" id="guestMobile" placeholder="e.g. 9876543210">
         </div>
 
         <button class="btn btn-share" onclick="shareToWhatsApp()">
@@ -123,9 +118,9 @@
         
         <div id="msgBox" class="instruction">
             ✅ <b>Text Copied! / લખાણ કોપી થઈ ગયું છે!</b> <br><br>
-            1. Select WhatsApp.<br>
-            2. Search/Select the contact.<br>
-            3. <b>Long Press & PASTE</b> text in the caption.<br>
+            1. Select WhatsApp from the menu.<br>
+            2. Pick the contact.<br>
+            3. <b>Long Press & PASTE</b> the text in the caption box.<br>
         </div>
 
         <div id="previewArea">🌸 *સ્નેહી સ્વજન શ્રી,* *<span id="displayName" class="highlight">___(Name)___</span>*🌸
@@ -149,8 +144,9 @@
     </div>
 
     <script>
-        // PDF FILE NAME CONFIGURATION
-        const DEFAULT_PDF_FILE = "Hirpara Parivar kankotri servo.pdf";
+        // THIS IS THE FILE NAME THE CODE LOOKS FOR
+        // Make sure your real PDF is named exactly "Hirpara Parivar kankotri sajode.pdf"
+        const DEFAULT_PDF_FILE = "Hirpara Parivar kankotri sajode.pdf";
 
         function updatePreview() {
             var inputName = document.getElementById("guestName").value;
@@ -173,24 +169,26 @@
                 return;
             }
 
-            // 1. COPY TEXT (Auto-Copy Fix)
+            // STEP 1: Copy Text to Clipboard (Workaround for Android WhatsApp)
             try {
                 await navigator.clipboard.writeText(textContent);
+                // Show the instruction box to user
                 msgBox.style.display = "block"; 
             } catch (err) {
                 console.error("Copy failed", err);
             }
 
-            // 2. SHARE PDF
+            // STEP 2: Fetch the PDF and Share
             if (navigator.share) {
                 try {
                     const response = await fetch(DEFAULT_PDF_FILE);
                     
                     if (!response.ok) {
-                        throw new Error("PDF File not found! Ensure 'Hirpara Parivar kankotri servo.pdf' is in the folder.");
+                        throw new Error("File not found! Make sure 'Hirpara Parivar kankotri sajode.pdf' is in the folder.");
                     }
                     
                     const blob = await response.blob();
+                    // We name the file that gets shared "Hirpara_Invitation.pdf"
                     const file = new File([blob], "Hirpara_Invitation.pdf", { type: "application/pdf" });
 
                     let shareData = {
@@ -204,7 +202,7 @@
                     alert("Error: " + err.message);
                 }
             } else {
-                alert("Your browser does not support file sharing. Please Copy Text & Attach PDF manually.");
+                alert("Your browser does not support sharing files. Please Copy Text & Send manually.");
             }
         }
     </script>
