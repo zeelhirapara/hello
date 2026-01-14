@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirpara Parivar Invitation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce4ec;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #880e4f;
+        }
+
+        h2 { color: #880e4f; margin-bottom: 5px; }
+        .status { font-size: 13px; color: #555; margin-bottom: 15px; background: #eee; padding: 8px; border-radius: 5px;}
+
+        .input-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff9c4;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        label { font-weight: bold; color: #333; display: block; margin-bottom: 5px; }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 95%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 20px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-share { background-color: #25D366; } /* WhatsApp Green */
+        .btn:active { transform: scale(0.98); }
+
+        /* Preview Area */
+        #previewArea {
+            text-align: left;
+            background-color: #fafafa;
+            padding: 15px;
+            border: 1px dashed #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #d81b60;
+            background-color: #ffede0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .instruction {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #c8e6c9;
+            display: none; /* Hidden by default */
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🌸 Hirpara Parivar Invitation 🌸</h2>
+        <div class="status">📄 File: <b>Hirpara Parivar kankotri servo.pdf</b></div>
+
+        <div class="input-group">
+            <label>✍️ Enter Guest Name / મહેમાનનું નામ:</label>
+            <input type="text" id="guestName" placeholder="e.g. કિરીટભાઈ પટેલ" oninput="updatePreview()">
+        </div>
+
+        <button class="btn btn-share" onclick="shareToWhatsApp()">
+            🚀 Share on WhatsApp
+        </button>
+        
+        <div id="msgBox" class="instruction">
+            ✅ <b>Text Copied! / લખાણ કોપી થઈ ગયું છે!</b> <br><br>
+            1. Select WhatsApp from the menu.<br>
+            2. Pick the contact.<br>
+            3. <b>Long Press & PASTE</b> the text in the caption box.<br>
+        </div>
+
+        <div id="previewArea">🌸 *સ્નેહી સ્વજન શ્રી,* *<span id="displayName" class="highlight">___(Name)___</span>*🌸
+
+✨🌸 *|| હીરપરા પરિવાર – આમંત્રણ ||* 🌸✨
+ 
+💖 અમારા આંગણે આવતાં છે સુખનાં સુવર્ન ક્ષણો, જ્યાં 
+ચિ. દર્શિલ 🤵‍♂️અને ચિ. સુધા 👰‍♀️
+ના શુભ લગ્ન 💍 ની નિર્ધારણા થઈ છે. તો આ મંગલ પ્રસંગે આપશ્રી પધારી વર–વધૂને આશીર્વાદથી નવાજશો એવી હાર્દિક વિનંતી.
+ 
+📅 *તારીખ: સોમવાર, ૨૬/૦૧/૨૦૨૬*
+ 
+🙏🏻 *નિમંત્રક:*
+શ્રી દિપકભાઈ રવજીભાઈ હીરપરા 
+શ્રી ગિરીશભાઈ રવજીભાઈ હીરપરા
+શ્રી ચંદ્રેશભાઇ રવજીભાઈ હીરપરા
+શ્રી ડેનિશ દિપકભાઈ હીરપરા 
+તથા હીરપરા પરિવાર 🌸✨
+
+✨🌸 *|| આપને આવકારવા હીરપરા પરિવાર હાર્દિક આતુરતાથી રાહ જુએ છે ||* 🌸✨</div>
+    </div>
+
+    <script>
+        // THIS IS THE FILE NAME THE CODE LOOKS FOR
+        // Make sure your real PDF is named exactly "Hirpara Parivar kankotri servo.pdf"
+        const DEFAULT_PDF_FILE = "Hirpara Parivar kankotri servo.pdf";
+
+        function updatePreview() {
+            var inputName = document.getElementById("guestName").value;
+            var displaySpan = document.getElementById("displayName");
+            
+            if (inputName.trim() !== "") {
+                displaySpan.innerText = inputName;
+            } else {
+                displaySpan.innerText = "___(Name)___";
+            }
+        }
+
+        async function shareToWhatsApp() {
+            const guestName = document.getElementById("guestName").value;
+            const textContent = document.getElementById("previewArea").innerText;
+            const msgBox = document.getElementById("msgBox");
+
+            if (guestName.trim() === "") {
+                alert("Please enter a guest name first!");
+                return;
+            }
+
+            // STEP 1: Copy Text to Clipboard (Workaround for Android WhatsApp)
+            try {
+                await navigator.clipboard.writeText(textContent);
+                // Show the instruction box to user
+                msgBox.style.display = "block"; 
+            } catch (err) {
+                console.error("Copy failed", err);
+            }
+
+            // STEP 2: Fetch the PDF and Share
+            if (navigator.share) {
+                try {
+                    const response = await fetch(DEFAULT_PDF_FILE);
+                    
+                    if (!response.ok) {
+                        throw new Error("File not found! Make sure 'Hirpara Parivar kankotri servo.pdf' is in the folder.");
+                    }
+                    
+                    const blob = await response.blob();
+                    // We name the file that gets shared "Hirpara_Invitation.pdf"
+                    const file = new File([blob], "Hirpara_Invitation.pdf", { type: "application/pdf" });
+
+                    let shareData = {
+                        files: [file],
+                        title: 'Wedding Invitation',
+                        text: textContent 
+                    };
+
+                    await navigator.share(shareData);
+                } catch (err) {
+                    alert("Error: " + err.message);
+                }
+            } else {
+                alert("Your browser does not support sharing files. Please Copy Text & Send manually.");
+            }
+        }
+    </script>
+
+</body>
+</html>
